@@ -51,7 +51,7 @@ class App extends React.Component {
     var {items} = this.state;
     if (this.state.visible) { 
       return (
-        <div class="showList">
+        <div>
           <ul>
           { /* <li>CountryCode: {items.CountryCode}</li>
           <li>VATNumber: {items.VATNumber}</li> */}
