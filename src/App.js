@@ -53,8 +53,6 @@ class App extends React.Component {
       return (
         <div>
           <ul>
-          { /* <li>CountryCode: {items.CountryCode}</li>
-          <li>VATNumber: {items.VATNumber}</li> */}
           {Object.keys(items).map(key => 
             <li>
               {key}: {items[key]}           
@@ -74,12 +72,11 @@ class App extends React.Component {
       return (
         <div className="results">
           <h2>VAT number lookup</h2>
-          
           <div>
             <form onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Search by ID" pattern=".{11}" required title="Please enter a valid ID(11 characters)" onChange={this.handleInputChange}>
+                <input type="text" placeholder="Search by ID" pattern=".{3,11}" required title="ID must be between 3 and 11 characters" onChange={this.handleInputChange}>
                 </input>
-                <button onClick={() => this.setState({visible: true})}>Search</button>
+                <button style={btnStyle} onClick={() => this.setState({visible: true})}>Search</button>
             </form>
             {this.showItem()}
           </div>
@@ -87,6 +84,14 @@ class App extends React.Component {
       );
     }
   }
+}
+
+const btnStyle = {
+  border: 'none',
+  padding: '5px 10px',
+  borderRadius: '80%',
+  cursor: 'pointer',
+  color: '#282c34',
 }
 
 export default App;

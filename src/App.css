@@ -9,10 +9,6 @@
   color: white;
 }
 
-button {
-  color: green;
-  border: 2px solid green;
-}
 
 button:hover {
   background-color: green;
