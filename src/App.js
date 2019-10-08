@@ -1,5 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route  } from 'react-router-dom';
 import './App.css';
+import About from './components/pages/About';
+import Header from './components/layout/Header';
 
 class App extends React.Component {
 
@@ -53,6 +56,8 @@ class App extends React.Component {
       return (
         <div>
           <ul>
+          { /* <li>CountryCode: {items.CountryCode}</li>
+          <li>VATNumber: {items.VATNumber}</li> */}
           {Object.keys(items).map(key => 
             <li>
               {key}: {items[key]}           
@@ -65,22 +70,30 @@ class App extends React.Component {
   }
 
   render() {
-    var {isLoaded, inputData} = this.state;
+    var {isLoaded} = this.state;
     if(!isLoaded) {
       return <div>Loading data...</div>;
     } else {
       return (
-        <div className="results">
-          <h2>VAT number lookup</h2>
-          <div>
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="Search by ID" pattern=".{3,11}" required title="ID must be between 3 and 11 characters" onChange={this.handleInputChange}>
-                </input>
-                <button style={btnStyle} onClick={() => this.setState({visible: true})}>Search</button>
-            </form>
-            {this.showItem()}
+        <Router>
+          <div className="results">
+            <Header />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <div>
+                  <form style={formStyle} onSubmit={this.handleSubmit}>
+                      <input type="text" placeholder="Search by ID" pattern=".{3,11}" required title="ID must be between 3 and 11 characters" onChange={this.handleInputChange}>
+                      </input>
+                      <button style={btnStyle} onClick={() => this.setState({visible: true})}>Search</button>
+                  </form>
+                  {this.showItem()}
+                </div>
+              </React.Fragment>
+            )}/>
+            <Route path="/about" component={About} />
+            
           </div>
-        </div>
+        </Router>
       );
     }
   }
@@ -93,5 +106,10 @@ const btnStyle = {
   cursor: 'pointer',
   color: '#282c34',
 }
+
+const formStyle = {
+  textAlign: 'center'
+}
+
 
 export default App;
